@@ -10,15 +10,31 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // Widget buildMenuCard (BuildContext context,
+
+  int? selectedMenuIndex;
   Widget buildMenuCard (BuildContext context,
-  MenuModel menu
+  MenuModel menu,
+  int index
   ) {  
+    menu.isSelected = index == selectedMenuIndex;
     return  GestureDetector(
       onTap:(){
+        // setState(() {
+        //   // Cambia el valor de isSelected para el elemento actual
+        //   menu.isSelected = !menu.isSelected;
+        selectedMenuIndex = menu.isSelected ? null : index;
+
+
+        // });  
         setState(() {
-          // Cambia el valor de isSelected para el elemento actual
-          menu.isSelected = !menu.isSelected;
-        });        
+          // // Deselecciona todos los elementos primero para luego seleccionar solo el actual
+          // for (var item in listMenu) {
+          //   item.isSelected = false;
+          // }
+          // menu.isSelected = !menu.isSelected;
+        });
+
+
         print('Click en $MenuModel.title');
         print('Click en $MenuModel.isSelected');
       },
@@ -133,7 +149,8 @@ class _HomePageState extends State<HomePage> {
                   return buildMenuCard(
                     //context,...listMenu[index].values
                     context,
-                    listMenu[index]
+                    listMenu[index],
+                    index
                     // listMenu[index].title,
                     // listMenu[index].days,
                     // listMenu[index].price.toString(),
