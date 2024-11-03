@@ -55,18 +55,17 @@ class _FavoriteDeportsPageState extends State<FavoriteDeportsPage> {
                   for (int i = 0; i < deportModelList.length; i++)
                     ItemDeportWidget(
                       deporte: deportModelList[i],
-                      onTap:(){
-                        if ( !deportModelList[i].isFavorite ) {
+                      onTap: () {
+                        if (!deportModelList[i].isFavorite) {
                           deportModelList[i].isFavorite = true;
                           favoriteDeportList.add(deportModelList[i]);
                         } else {
                           deportModelList[i].isFavorite = false;
                           favoriteDeportList.remove(deportModelList[i]);
                         }
-                          // deportModelList[i].isFavorite = !deportModelList[i].isFavorite;
-                          // favoriteDeportList.add(deportModelList[i]);
                         setState(() {});
-                      }
+                      },
+                      isOnFavoritListContainer: false,
                     )
                 ],
               ),
@@ -96,15 +95,16 @@ class _FavoriteDeportsPageState extends State<FavoriteDeportsPage> {
                 runSpacing: 8,
                 alignment: WrapAlignment.center,
                 children: [
-                  for (int i = 0; i < favoriteDeportList.length; i++)
-                    buildDeporteContainer(favoriteDeportList[i].name),
-                  // buildDeporteContainer("Volery"),
-                  // buildDeporteContainer("Volery"),
-                  // buildDeporteContainer("Volery"),
-                  // buildDeporteContainer("Volery"),
-                  // buildDeporteContainer("Volery"),
-                  // buildDeporteContainer("Volery"),
-                  // buildDeporteContainer("Volery"),
+                  for (int j = 0; j < favoriteDeportList.length; j++)
+                    ItemDeportWidget(
+                      deporte: favoriteDeportList[j],
+                      onTap: () {
+                        favoriteDeportList[j].isFavorite = false;
+                        favoriteDeportList.remove(favoriteDeportList[j]);
+                        setState(() {});
+                      },
+                      isOnFavoritListContainer: true,
+                    )
                 ],
               ),
             ),
